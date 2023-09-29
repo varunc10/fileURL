@@ -1,4 +1,4 @@
-# Backend Application README
+## File Uploading and Short URL Generating Service
 
 This is the README for the backend application of a file uploading and short url generating service. This backend application is responsible for handling API requests, authentication, file uploads, and other server-side functionality.
 
