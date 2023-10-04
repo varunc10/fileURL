@@ -3,12 +3,12 @@ const multer = require('multer');
 const mongoose = require('mongoose')
 const User = require('./models/model')
 const File = require('./models/fileSchema')
-const cors = require("cors"); 
+const cors = require("cors");
 require("dotenv").config();
 const AWS = require('aws-sdk');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser'); 
+const bodyParser = require('body-parser');
 const TinyURL = require('tinyurl');
 
 const app = express();
@@ -35,15 +35,6 @@ mongoose
   });
 
 const s3 = new AWS.S3();
-
-
-s3.listBuckets((err, data) => {
-  if (err) {
-    console.error('Error listing S3 buckets:', err);
-  } else {
-    console.log('S3 buckets:', data.Buckets);
-  }
-});
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -85,7 +76,7 @@ app.post('/api/register', async (req, res) => {
       username: newUser.username,
     };
 
-    res.status(201).json({ message: 'User registered successfully.', userDetails});
+    res.status(201).json({ message: 'User registered successfully.', userDetails });
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ error: 'Internal server error.' });
@@ -118,7 +109,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-app.post('/api/upload', upload.single('file'), async(req, res) => {
+app.post('/api/upload', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded.' });
   }
@@ -158,7 +149,7 @@ app.post('/api/upload', upload.single('file'), async(req, res) => {
     console.error('Error uploading file to S3:', error);
     res.status(500).json({ error: 'Internal server error.' });
   }
-    
+
 });
 
 app.get('/api/files/:username', async (req, res) => {
